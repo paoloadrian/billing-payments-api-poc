@@ -29,7 +29,7 @@ namespace BasicBilling.API.Migrations
                     b.Property<long>("ClientId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Month")
+                    b.Property<string>("Period")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -38,13 +38,13 @@ namespace BasicBilling.API.Migrations
                         .HasColumnType("INTEGER")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("Type")
+                    b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Type", "Month", "ClientId");
+                    b.HasIndex("Category", "Period", "ClientId");
 
                     b.ToTable("BillItems");
                 });

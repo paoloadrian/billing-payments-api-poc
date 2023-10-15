@@ -43,7 +43,7 @@ public class BillsController : ControllerBase
         }
         foreach (var client in _context.ClientItems)
         {
-            var newBill = new Bill { Type = billPayload.Type, Month = billPayload.Month, ClientId = client.Id, Status = false };
+            var newBill = new Bill { Category = billPayload.Category, Period = billPayload.Period, ClientId = client.Id, Status = false };
             _context.BillItems.Add(newBill);
             await _context.SaveChangesAsync();
         }

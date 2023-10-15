@@ -26,7 +26,7 @@ namespace BasicBilling.API.Migrations
                     b.Property<long>("ClientId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Month")
+                    b.Property<string>("Period")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -35,13 +35,13 @@ namespace BasicBilling.API.Migrations
                         .HasColumnType("INTEGER")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("Type")
+                    b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Type", "Month", "ClientId");
+                    b.HasIndex("Category", "Period", "ClientId");
 
                     b.ToTable("BillItems");
 
@@ -50,241 +50,241 @@ namespace BasicBilling.API.Migrations
                         {
                             Id = 1L,
                             ClientId = 1L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 2L,
                             ClientId = 1L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 3L,
                             ClientId = 1L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 4L,
                             ClientId = 1L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 5L,
                             ClientId = 1L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 6L,
                             ClientId = 1L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 7L,
                             ClientId = 2L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 8L,
                             ClientId = 2L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 9L,
                             ClientId = 2L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 10L,
                             ClientId = 2L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 11L,
                             ClientId = 2L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 12L,
                             ClientId = 2L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 13L,
                             ClientId = 3L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 14L,
                             ClientId = 3L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 15L,
                             ClientId = 3L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 16L,
                             ClientId = 3L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 17L,
                             ClientId = 3L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 18L,
                             ClientId = 3L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 19L,
                             ClientId = 4L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 20L,
                             ClientId = 4L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 21L,
                             ClientId = 4L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 22L,
                             ClientId = 4L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 23L,
                             ClientId = 4L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 24L,
                             ClientId = 4L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 25L,
                             ClientId = 5L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 26L,
                             ClientId = 5L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 27L,
                             ClientId = 5L,
-                            Month = "202301",
+                            Period = "202301",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         },
                         new
                         {
                             Id = 28L,
                             ClientId = 5L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "SEWER"
+                            Category = "SEWER"
                         },
                         new
                         {
                             Id = 29L,
                             ClientId = 5L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "WATER"
+                            Category = "WATER"
                         },
                         new
                         {
                             Id = 30L,
                             ClientId = 5L,
-                            Month = "202302",
+                            Period = "202302",
                             Status = false,
-                            Type = "ELECTRICITY"
+                            Category = "ELECTRICITY"
                         });
                 });
 

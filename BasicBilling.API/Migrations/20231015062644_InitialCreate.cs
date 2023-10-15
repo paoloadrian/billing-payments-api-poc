@@ -16,8 +16,8 @@ namespace BasicBilling.API.Migrations
                 {
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<string>(type: "TEXT", nullable: false),
-                    Month = table.Column<string>(type: "TEXT", nullable: false),
+                    Category = table.Column<string>(type: "TEXT", nullable: false),
+                    Period = table.Column<string>(type: "TEXT", nullable: false),
                     Status = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
                     ClientId = table.Column<long>(type: "INTEGER", nullable: false)
                 },
@@ -40,9 +40,9 @@ namespace BasicBilling.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BillItems_Type_Month_ClientId",
+                name: "IX_BillItems_Type_Period_ClientId",
                 table: "BillItems",
-                columns: new[] { "Type", "Month", "ClientId" });
+                columns: new[] { "Category", "Period", "ClientId" });
         }
 
         /// <inheritdoc />

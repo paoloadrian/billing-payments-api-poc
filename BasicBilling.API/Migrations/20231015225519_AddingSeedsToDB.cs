@@ -14,7 +14,7 @@ namespace BasicBilling.API.Migrations
         {
             migrationBuilder.InsertData(
                 table: "BillItems",
-                columns: new[] { "Id", "ClientId", "Month", "Type" },
+                columns: new[] { "Id", "ClientId", "Period", "Category" },
                 values: new object[,]
                 {
                     { 1L, 1L, "202301", "SEWER" },
