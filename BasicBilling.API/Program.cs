@@ -1,15 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using BasicBilling.API.Models;
 
+var MyCorsPolicy = "_myCorsPolicy";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+if(builder.Environment.IsDevelopment())  
+{  
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: MyCorsPolicy,
+            policy  =>
+            {
+                policy.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    });
+}
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ClientContext>(opt =>
     opt.UseSqlite("BasicBilling"));
-// builder.Services.AddDbContext<ClientContext>(opt =>
-//     opt.UseSqlite("BillItems"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyCorsPolicy);
 
 app.UseAuthorization();
 
