@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using BasicBilling.API.Models;
+using BasicBilling.API.Services;
 
 namespace BasicBilling.API.Controllers;
 
@@ -8,24 +8,27 @@ namespace BasicBilling.API.Controllers;
 [ApiController]
 public class BillsController : ControllerBase
 {
-    private readonly ClientContext _context;
+    private readonly IBillService _billService;
 
-    public BillsController(ClientContext context)
+    public BillsController(IBillService billService)
     {
-        _context = context;
+        _billService = billService;
     }
 
     // GET: Bills
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Bill>>> GetBillItems([FromQuery(Name = "ClientId")] int ClientId)
+    public async Task<ActionResult<IEnumerable<Bill>>> GetBillItems([FromQuery(Name = "ClientId")] long ClientId)
     {
-        if (_context.BillItems == null)
+        List<Bill> result;
+        if (ClientId != 0)
+            result = await _billService.GetClientBillsAsync(ClientId);
+        else
+            result = await _billService.GetBillsAsync();
+        if (result.Count == 0)
         {
             return NotFound();
         }
-        if (ClientId != 0)
-            return await _context.BillItems.Where(bill => bill.ClientId.Equals(ClientId)).ToListAsync();
-        return await _context.BillItems.ToListAsync();
+        return result;
     }
 
     // POST: Bills
@@ -33,22 +36,15 @@ public class BillsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Bill>> PostBill(BillPayload billPayload)
     {
-        if (_context.BillItems == null)
+        if (billPayload.ClientId != null && billPayload.ClientId != 0)
         {
-            return Problem("Entity set 'ClientContext.BillItems'  is null.");
+            await _billService.AddClientBillAsync(billPayload.Period, billPayload.Category, (long)billPayload.ClientId);
         }
-        if (_context.ClientItems == null)
+        else
         {
-            return Problem("Entity set 'ClientContext.ClientItems'  is null.");
-        }
-        foreach (var client in _context.ClientItems)
-        {
-            var newBill = new Bill { Category = billPayload.Category, Period = billPayload.Period, ClientId = client.Id, Status = false };
-            _context.BillItems.Add(newBill);
-            await _context.SaveChangesAsync();
-        }
-
-        return CreatedAtAction(nameof(GetBillItems), _context.BillItems);
+            await _billService.AddBillsAsync(billPayload.Period, billPayload.Category);
+        } 
+        return Ok();
     }
 
     // PUT: Bills/5
@@ -56,21 +52,11 @@ public class BillsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PayBill(long id)
     {
-        if (_context.BillItems == null)
-        {
-            return Problem("Entity set 'ClientContext.BillItems'  is null.");
-        }
-        var bill = _context.BillItems?.Find(id);
-        if (bill != null) {
-            bill.Status = true;
-            _context.Entry(bill).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-        }
-        else
+        bool found = await _billService.PayBillAsync(id);
+        if (!found)
         {
             return NotFound();
         }
-
-        return NoContent();
+        return Ok();
     }
 }

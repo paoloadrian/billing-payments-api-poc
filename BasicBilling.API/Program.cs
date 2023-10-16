@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BasicBilling.API.Models;
+using BasicBilling.API.Services;
 
 var MyCorsPolicy = "_myCorsPolicy";
 
@@ -23,6 +24,7 @@ if(builder.Environment.IsDevelopment())
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ClientContext>(opt =>
     opt.UseSqlite("BasicBilling"));
+builder.Services.AddScoped<IBillService, BillService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

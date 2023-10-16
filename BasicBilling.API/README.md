@@ -17,6 +17,7 @@ Run the project using port 5000 using command:
 ## Swagger
 Please go to http://localhost:5000/swagger/index.html to use swagger to:
 - Understand how the API works
-- Create new users or bills
+- Create new Clients
+- Create new Bills. Send optional parameter "clientId" (with value different from 0) if you want to create it just for one client, otherwise it gets created for all customer)
 - Or execute any other action
 
